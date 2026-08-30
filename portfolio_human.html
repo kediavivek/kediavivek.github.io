@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vivek Kedia — Delivery & AI Tooling Consultant</title>
+<style>
+  :root{
+    --paper:#F7F4EE;
+    --paper-2:#EFEAE1;
+    --ink:#25231F;
+    --soft:#6F6A62;
+    --line:#D8D1C6;
+    --accent:#B85C38;
+    --accent-dark:#91452A;
+    --green:#46675A;
+    --white:#FFFDF9;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  }
+  h1,h2,h3,h4{margin:0;color:var(--ink);letter-spacing:-.025em}
+  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+  h3,h4{font-weight:650}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 34px}
+  section{padding:92px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    display:flex;align-items:center;gap:9px;
+    margin-bottom:18px;
+    color:var(--accent);
+    font-size:12px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent)}
+
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(247,244,238,.94);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:28px;min-height:72px}
+  .brand{display:flex;align-items:center;gap:11px;margin-right:auto}
+  .brand .mark{
+    width:36px;height:36px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:13px;font-weight:700;
+  }
+  .brand .name{font-weight:700;font-size:15px;line-height:1.15}
+  .brand .role{font-size:11px;color:var(--soft);margin-top:2px}
+  nav.links{display:flex;gap:25px}
+  nav.links a{font-size:14px;color:var(--soft)}
+  nav.links a:hover,nav.links a:focus-visible{color:var(--ink)}
+  .status-pill{
+    border-left:1px solid var(--line);padding-left:20px;
+    font-size:12px;color:var(--green);white-space:nowrap;
+  }
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px}
+  .navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:7px;padding:7px 10px;color:var(--ink)}
+
+  .hero{padding:104px 0 110px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.75fr);gap:85px;align-items:center}
+  .hero h1{font-size:clamp(46px,6vw,76px);line-height:1.02;max-width:760px;margin-bottom:27px}
+  .hero h1 .hl{color:var(--accent);font-style:italic}
+  .hero p.lede{font-size:18px;line-height:1.7;color:var(--soft);max-width:660px;margin:0 0 30px}
+  .cta-row{display:flex;gap:11px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:11px 17px;border-radius:7px;font-size:14px;font-weight:700;
+    border:1px solid var(--ink);transition:transform .15s,background .15s,color .15s;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:#3A3731}
+  .btn-ghost{background:transparent}
+  .btn-ghost:hover{background:var(--paper-2)}
+
+  .hero-note{
+    border-left:2px solid var(--accent);
+    padding:9px 0 9px 24px;
+    color:var(--soft);
+  }
+  .hero-note strong{display:block;color:var(--ink);font-family:Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px}
+  .hero-note p{margin:0;font-size:14px}
+  .quick-facts{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:28px;border-top:1px solid var(--line)}
+  .fact{padding:15px 0;border-bottom:1px solid var(--line)}
+  .fact:nth-child(odd){margin-right:18px}
+  .fact .num{display:block;font-family:Georgia,serif;font-size:25px;color:var(--accent)}
+  .fact .label{font-size:12px;color:var(--soft)}
+
+  .positioning .wrap{max-width:900px}
+  .positioning h2{font-size:clamp(34px,4vw,52px);line-height:1.1;max-width:800px;margin-bottom:22px}
+  .positioning p{color:var(--soft);max-width:780px;margin:0 0 13px}
+  .split-line{display:grid;grid-template-columns:1fr 1fr;gap:42px;margin-top:35px}
+  .split-card{padding:22px 0;border-top:2px solid var(--ink)}
+  .split-card.ok{border-top-color:var(--accent)}
+  .split-card .tag{display:block;color:var(--soft);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px}
+  .split-card.ok .tag{color:var(--accent)}
+  .split-card h3{font-family:Georgia,serif;font-size:24px;font-weight:500;margin-bottom:7px}
+  .split-card p{font-size:14px;margin:0}
+
+  #services h2,#case-study h2{font-size:clamp(34px,4vw,48px)}
+  .section-intro{color:var(--soft);max-width:640px;margin:9px 0 35px}
+  .phase{
+    display:grid;grid-template-columns:55px 1fr auto;gap:20px;
+    padding:27px 0;border-top:1px solid var(--line);
+  }
+  .phase:first-of-type{border-top:0}
+  .phase-no{font-family:Georgia,serif;font-size:25px;color:var(--accent)}
+  .phase-body h3{font-size:20px;margin-bottom:5px}
+  .phase-body .desc{color:var(--soft);font-size:14px;max-width:680px;margin:0}
+  .phase-meta{display:flex;gap:9px;align-items:flex-start;justify-content:flex-end;flex-wrap:wrap}
+  .chip{
+    display:inline-block;border:1px solid var(--line);border-radius:5px;
+    padding:4px 8px;color:var(--soft);font-size:11px;background:transparent;
+  }
+  .chip.price{color:var(--accent-dark);border-color:#D4AA99}
+
+  .case-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:35px}
+  .case-head h2{margin-top:2px}
+  .status-shipped{font-size:12px;color:var(--green);font-weight:700}
+  .case-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:0 48px;margin-bottom:34px}
+  .case-block{padding:23px 0;border-top:1px solid var(--line)}
+  .case-block .k{display:block;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px}
+  .case-block p,.case-block ul{font-size:14px;color:var(--soft);margin:0}
+  .case-block ul{padding-left:18px}
+  .case-block li{margin-bottom:6px}
+  .result-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
+  .result-card{text-align:left;padding:20px 16px 18px 0}
+  .result-card+.result-card{border-left:1px solid var(--line);padding-left:20px}
+  .result-card .big{font-family:Georgia,serif;font-size:30px;color:var(--accent)}
+  .result-card .lbl{font-size:11px;color:var(--soft);margin-top:3px}
+  .tags-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+
+  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:75px}
+  .about-card{position:sticky;top:105px;height:max-content}
+  .about-card .initials{
+    width:72px;height:72px;border-radius:50%;background:var(--paper-2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:25px;margin-bottom:18px;
+  }
+  .about-card h3{font-family:Georgia,serif;font-size:25px;font-weight:500;margin-bottom:3px}
+  .about-card .loc{font-size:13px;color:var(--soft);margin-bottom:20px}
+  .about-card .infoline{font-size:13px;color:var(--soft);margin-bottom:8px;word-break:break-word}
+  .about-card .infoline b{color:var(--ink);font-weight:600}
+  .timeline{display:flex;flex-direction:column}
+  .tl-item{display:grid;grid-template-columns:120px 1fr;gap:25px;padding:23px 0;border-top:1px solid var(--line)}
+  .tl-item:first-child{padding-top:0;border-top:0}
+  .tl-when{font-size:12px;color:var(--accent);font-weight:700}
+  .tl-body h4{font-family:Georgia,serif;font-size:20px;font-weight:500;margin-bottom:3px}
+  .tl-body .org{font-size:13px;color:var(--soft);margin-bottom:7px}
+  .tl-body p{font-size:14px;color:var(--soft);margin:0}
+
+  .contact{border-bottom:0;padding-bottom:105px}
+  .contact-panel{
+    background:var(--ink);color:var(--paper);
+    padding:55px 48px;border-radius:12px;
+    text-align:center;
+  }
+  .contact-panel .eyebrow{justify-content:center;color:#D99B7F}
+  .contact-panel .eyebrow::before{background:#D99B7F}
+  .contact-panel h2{color:var(--paper);font-size:clamp(34px,4vw,48px);margin-bottom:12px}
+  .contact-panel p{color:#C8C2B8;max-width:560px;margin:0 auto 26px}
+  .contact-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .contact-panel .btn-primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .contact-panel .btn-ghost{color:var(--paper);border-color:#625D55}
+  .contact-panel .btn-ghost:hover{background:#34312C}
+  footer{text-align:center;padding:26px 0;color:var(--soft);font-size:12px}
+
+  @media(max-width:880px){
+    .hero-grid,.about-grid,.split-line{grid-template-columns:1fr}
+    .hero{padding:75px 0 85px}
+    .hero-grid{gap:50px}
+    .case-grid{grid-template-columns:1fr}
+    .phase{grid-template-columns:42px 1fr}
+    .phase-meta{grid-column:2;justify-content:flex-start}
+    .result-strip{grid-template-columns:1fr}
+    .result-card+.result-card{border-left:0;border-top:1px solid var(--line);padding-left:0}
+    .about-card{position:static}
+    nav.links{position:absolute;top:72px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);display:none;flex-direction:column;padding:16px 34px;gap:12px}
+    nav.links.open{display:flex}
+    .navtoggle{display:block}
+    .status-pill{display:none}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 22px}
+    section{padding:70px 0}
+    .hero h1{font-size:46px}
+    .hero p.lede{font-size:16px}
+    .case-head{align-items:flex-start;flex-direction:column}
+    .tl-item{grid-template-columns:1fr;gap:5px}
+    .contact-panel{padding:42px 24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">VK</div>
+      <div>
+        <div class="name">Vivek Kedia</div>
+        <div class="role">DELIVERY · PMO · AI TOOLING</div>
+      </div>
+    </div>
+    <nav class="links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#case-study">One example</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="status-pill"><span class="dot"></span>Open for engagements</span>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Delivery, PMO &amp; practical AI</div>
+      <h1>I help teams get <span class="hl">unstuck</span> — and keep delivery moving.</h1>
+      <p class="lede">I’ve spent 8 years in enterprise delivery, from banking systems at TCS to multi-stream work at Valethi. These days, I combine that experience with practical AI tools — the kind that can actually be used by the team, not just shown in a presentation.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Tell me what’s stuck</a>
+        <a href="#case-study" class="btn btn-ghost">See what I built</a>
+      </div>
+    </div>
+
+    <div class="console">
+      <div class="console-head">
+        <span class="title">A project I built</span>
+        <span class="src">used in practice</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div>
+            <div class="label">Build time</div>
+            <div class="sub">vs. 13.5 days scoped</div>
+          </div>
+          <div class="value" >4 days</div>
+        </div>
+        <div class="stat">
+          <div>
+            <div class="label">Blocker time cut</div>
+            <div class="sub">4.2 days → 2.8 days avg</div>
+          </div>
+          <div class="value" >33%</div>
+        </div>
+        <div class="stat">
+          <div>
+            <div class="label">Associates tracked</div>
+            <div class="sub">since go-live</div>
+          </div>
+          <div class="value" >33</div>
+        </div>
+      </div>
+      <div class="console-foot">There’s a little more detail in the <a href="#case-study">case study</a>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="positioning">
+  <div class="wrap">
+    <div class="eyebrow">Why I do this</div>
+    <h2>Good process shouldn’t need a huge PMO. And a PM shouldn’t need a dev team for every small problem.</h2>
+    <p>Lean teams still need clear ownership, sensible reporting and someone watching the details. But hiring a full PMO can be overkill. At the same time, many freelance PMs stop at plans and presentations.</p>
+    <p>I sit somewhere in the middle: I know how enterprise delivery works, but I also like getting my hands dirty and building the small tools that make the process better.</p>
+    <div class="split-line">
+      <div class="split-card">
+        <span class="tag">The old way</span>
+        <h3>Everyone is working from a different version of the truth</h3>
+        <p>Manual spreadsheets, no audit trail, blockers surface only after they've already cost you a deadline.</p>
+      </div>
+      <div class="split-card ok">
+        <span class="tag">The better way</span>
+        <h3>The team can see what’s happening</h3>
+        <p>Every step owned, every blocker timestamped and accountable, leadership sees reality instead of a status meeting summary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">How I approached it I can help</div>
+    <h2 style="font-size:30px; margin-bottom:8px;">A few ways we can work together</h2>
+    <p style="color:var(--muted); font-size:15px; max-width:600px;">Start small if you want. We can look at the problem first, build something useful, or work together longer term.</p>
+
+    <div class="phase">
+      <div class="phase-no">01</div>
+      <div class="phase-body">
+        <h3>Look — Process Audit</h3>
+        <p class="desc">A one-week look at how work moves today. I’ll point out 3–5 practical fixes, what they’re likely to improve, and what I’d leave alone. No build commitment.</p>
+        <div class="phase-meta">
+          <span class="chip">1 week</span>
+          <span class="chip price">₹15,000 – 30,000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-no">02</div>
+      <div class="phase-body">
+        <h3>Build — Internal Tool</h3>
+        <p class="desc">A small internal tool — tracker, dashboard, SLA workflow or something similar. I use AI to speed up development, but the workflow and business logic still come from the real problem.</p>
+        <div class="phase-meta">
+          <span class="chip">1–3 weeks</span>
+          <span class="chip price">₹40,000 – 1,50,000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-no">03</div>
+      <div class="phase-body">
+        <h3>Stay — Fractional Delivery Lead</h3>
+        <p class="desc">Ongoing part-time support for delivery, reporting, sprint rhythm and the things that tend to slip when everyone is busy.</p>
+        <div class="phase-meta">
+          <span class="chip">Monthly retainer</span>
+          <span class="chip price">₹40,000 – 80,000/mo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="case-study">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <div class="eyebrow">One example</div>
+        <h2>Onboarding Tracker</h2>
+      </div>
+      <span class="status-shipped">● SHIPPED · IN USE</span>
+    </div>
+
+    <div class="case-grid">
+      <div class="case-block">
+        <span class="k">What was going wrong</span>
+        <p>Associate onboarding was tracked manually across spreadsheets and chats — no single source of truth on status, blockers stayed invisible until they'd already delayed a milestone, and there was no audit trail on who changed what or when.</p>
+      </div>
+      <div class="case-block">
+        <span class="k">What I built</span>
+        <ul>
+          <li>Role-based console with per-user permissions</li>
+          <li>Multi-associate checklists by phase, with blocker capture &amp; timestamped resolution</li>
+          <li>Staffing/lifecycle board (Planned → Hired → At Risk)</li>
+          <li>Live dashboard, full audit log, CSV/Excel import-export, real-time sync</li>
+        </ul>
+      </div>
+      <div class="case-block">
+        <span class="k">How I approached it</span>
+        <p>Built as a single-file application, self-directed — no dev team, no sprint cycle. I described the workflow, business rules and edge cases directly to Claude and Emergent, and iterated the logic and UI myself in days.</p>
+      </div>
+      <div class="case-block">
+        <span class="k">Why I think it matters</span>
+        <p>The useful part wasn’t the technology. It was turning a messy process into something the team could actually see and use.</p>
+      </div>
+    </div>
+
+    <div class="result-strip">
+      <div class="result-card">
+        <div class="big">4d <span style="font-size:14px;color:var(--muted)">vs 13.5d</span></div>
+        <div class="lbl">Req → Go-Live</div>
+      </div>
+      <div class="result-card">
+        <div class="big">4.2d → 2.8d</div>
+        <div class="lbl">Avg. Blocker Open Time</div>
+      </div>
+      <div class="result-card">
+        <div class="big">33</div>
+        <div class="lbl">Associates Tracked</div>
+      </div>
+    </div>
+
+    <div class="tags-row">
+      <span class="chip">Manual Excel eliminated</span>
+      <span class="chip">Real-time transparency for leadership</span>
+      <span class="chip">Accountability on every blocker</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-card">
+      <div class="initials">VK</div>
+      <h3>Vivek Kedia</h3>
+      <div class="loc">Nagpur, India · Remote / Global</div>
+      <div class="infoline">Email · <b>kediavivek6@gmail.com</b></div>
+      <div class="infoline">Phone · <b>7058417832</b></div>
+      <div class="infoline">LinkedIn · <b>linkedin.com/in/vivekkedia</b></div>
+      <div class="infoline">Certification · <b>PSM I certified</b></div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Where I’ve worked</div>
+      <h2 style="font-size:26px; margin-bottom:20px;">A bit about me</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-when">2024 — Present</div>
+          <div class="tl-body">
+            <h4>Associate Project Manager</h4>
+            <div class="org">Valethi Technologies</div>
+            <p>Multi-stream delivery for a global enterprise client — finance systems, web, mobile, analytics, automation. Cut delivery cycle time 35%; built and shipped AI-assisted operational tools including the Onboarding Tracker above.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">2022 — 2024</div>
+          <div class="tl-body">
+            <h4>Technical Project Manager</h4>
+            <div class="org">Tata Consultancy Services</div>
+            <p>Managed enterprise delivery for a Latin American financial institution's digital payments and banking integrations. Scaled engineering teams from 8 to 40+.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">2018 — 2022</div>
+          <div class="tl-body">
+            <h4>Integration Developer</h4>
+            <div class="org">Tata Consultancy Services</div>
+            <p>Built enterprise integration modules for multinational banking clients using IBM Message Broker and Java — the hands-on systems background behind the delivery work above.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="eyebrow" style="justify-content:center;">Say hello</div>
+      <h2>Have something that’s getting in the way?</h2>
+      <p>Send me the problem in plain English. If I think I can help, I’ll tell you how. If I don’t, I’ll say that too.</p>
+      <div class="contact-links">
+        <a href="mailto:kediavivek6@gmail.com" class="btn btn-primary">Send me an email</a>
+        <a href="https://www.linkedin.com/in/vivekkedia/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> Vivek Kedia · Nagpur, India</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const counters = document.querySelectorAll('[data-count]');
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    let start = 0;
+    const duration = 900;
+    const startTime = performance.now();
+    function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const value = Math.floor(progress * target);
+      el.textContent = value + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(step);
+  };
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(c => obs.observe(c));
+</script>
+
+</body>
+</html>
